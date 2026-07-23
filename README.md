@@ -6,4 +6,4 @@ A Go rewrite of Averi2D
 ![](screenshot.png)
 
 ## Binaries
-Binaries for Windows and Linux are available in the Releases
+Binaries for Windows and Linux are available in the [Releases](https://github.com/s5lachlan/go-averi2d/releases)
