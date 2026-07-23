@@ -157,6 +157,11 @@ TravelSinceLastWalk: %f`,
 }
 
 func (self *Player) Update() {
+	if self.DestX > ScaleFactor*IdealScreenWidth {
+		self.DestX = -130
+	} else if self.DestX < -130 {
+		self.DestX = ScaleFactor * IdealScreenWidth
+	}
 	if rl.IsKeyPressed(rl.KeyX) {
 		if self.Children[0].Get().FrameY > 4 {
 			self.Children[0].Get().FrameY = 0
