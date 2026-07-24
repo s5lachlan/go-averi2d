@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"math/rand"
 
+	"go-averi2d/sysimp"
+
 	_ "github.com/gen2brain/raylib-go/raylib"
-	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 type Player struct {
@@ -63,7 +64,7 @@ func NewPlayer() *Player {
 func (self *Player) Draw() {
 	Tail := self.Children[0].Get()
 	self.BaseScene.Draw()
-	rl.DrawText(
+	sysimp.DrawText(
 		fmt.Sprintf(
 			`Debug mode
 X: %f, Y: %f
@@ -75,7 +76,7 @@ TravelSinceLastWalk: %f`,
 			self.VelocityX, self.VelocityY,
 			self.FrameY,
 			self.FlipHorizontal,
-			self.TravelSinceLastWalk), 0, 0, int32(32*ScaleFactor), rl.DarkGreen)
+			self.TravelSinceLastWalk), 0, 0, int32(32*ScaleFactor), sysimp.DarkGreen)
 	// Jumping animations
 	if self.DestY < float32(HardcodedGroundValue) {
 		if self.VelocityY < -2 {
@@ -90,8 +91,8 @@ TravelSinceLastWalk: %f`,
 	} else if self.FlipHorizontal && self.VelocityX < 0 || !self.FlipHorizontal && self.VelocityX > 0 {
 		// Sliding and turning around
 		if self.FrameY < 10 || self.FrameY > 14 {
-			rl.SetSoundPitch(SkidSound, 0.9+rl.Clamp(rand.Float32(), 0.0, 0.1))
-			rl.PlaySound(SkidSound)
+			sysimp.SetSoundPitch(SkidSound, 0.9+sysimp.Clamp(rand.Float32(), 0.0, 0.1))
+			sysimp.PlaySound(SkidSound)
 			self.FrameY = 10
 		} else if self.FrameY != 14 && FrameCount%3 == 0 {
 			self.FrameY += 1
@@ -108,10 +109,10 @@ TravelSinceLastWalk: %f`,
 			self.TravelSinceLastWalk = float32(ApproachZero(int(self.TravelSinceLastWalk), AverageStride))
 			self.FrameY += 1
 			if FrameCount%9 == 0 {
-				rl.PlaySound(RunLeftSound)
+				sysimp.PlaySound(RunLeftSound)
 			}
 			if FrameCount%5 == 0 {
-				rl.PlaySound(RunRightSound)
+				sysimp.PlaySound(RunRightSound)
 			}
 		}
 		// If we reach the end of the run cycle, go back to its start
@@ -162,22 +163,22 @@ func (self *Player) Update() {
 	} else if self.DestX < -130 {
 		self.DestX = ScaleFactor * IdealScreenWidth
 	}
-	if rl.IsKeyPressed(rl.KeyX) {
+	if sysimp.IsKeyPressed(sysimp.KeyX) {
 		if self.Children[0].Get().FrameY > 4 {
 			self.Children[0].Get().FrameY = 0
 		}
 		self.Children[0].Get().FrameY += 1
 	}
-	if rl.IsKeyPressed(rl.KeyEscape) {
-		rl.SetExitKey(rl.KeyEscape)
+	if sysimp.IsKeyPressed(sysimp.KeyEscape) {
+		sysimp.SetExitKey(sysimp.KeyEscape)
 		CurrentScene = MenuScene
 	}
-	if rl.IsKeyDown(rl.KeyA) {
+	if sysimp.IsKeyDown(sysimp.KeyA) {
 		if self.VelocityX > -self.RunSpeedMax && (FrameCount%3 != 0) {
 			self.VelocityX -= 1
 		}
 		self.FlipHorizontal = false
-	} else if rl.IsKeyDown(rl.KeyD) {
+	} else if sysimp.IsKeyDown(sysimp.KeyD) {
 		if self.VelocityX < self.RunSpeedMax && (FrameCount%3 != 0) {
 			self.VelocityX += 1
 		}
@@ -191,15 +192,15 @@ func (self *Player) Update() {
 	self.TravelSinceLastWalk += self.VelocityX
 
 	if self.DestY < float32(HardcodedGroundValue) {
-		if rl.IsKeyDown(rl.KeySpace) {
+		if sysimp.IsKeyDown(sysimp.KeySpace) {
 			self.VelocityY += 1
 		} else {
 			self.VelocityY += 3
 		}
-	} else if rl.IsKeyDown(rl.KeySpace) {
-		rl.SetSoundVolume(JumpSound, 0.3)
-		rl.SetSoundPitch(JumpSound, 0.9+rl.Clamp(rand.Float32(), 0.0, 0.1))
-		rl.PlaySound(JumpSound)
+	} else if sysimp.IsKeyDown(sysimp.KeySpace) {
+		sysimp.SetSoundVolume(JumpSound, 0.3)
+		sysimp.SetSoundPitch(JumpSound, 0.9+sysimp.Clamp(rand.Float32(), 0.0, 0.1))
+		sysimp.PlaySound(JumpSound)
 		self.VelocityY = -20
 	}
 

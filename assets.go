@@ -4,22 +4,21 @@ import (
 	"embed"
 	_ "embed"
 	"errors"
+	"go-averi2d/sysimp"
 	"strings"
-
-	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 //go:embed all:resource
 var Assets embed.FS
-var TextureAtlas rl.Texture2D
-var SkidSound rl.Sound
-var JumpSound rl.Sound
-var ChooseSound rl.Sound
-var SelectSound rl.Sound
-var RunLeftSound rl.Sound
-var RunRightSound rl.Sound
+var TextureAtlas sysimp.Texture2D
+var SkidSound sysimp.Sound
+var JumpSound sysimp.Sound
+var ChooseSound sysimp.Sound
+var SelectSound sysimp.Sound
+var RunLeftSound sysimp.Sound
+var RunRightSound sysimp.Sound
 
-func LoadTextureFromMemory(path string) rl.Texture2D {
+func LoadTextureFromMemory(path string) sysimp.Texture2D {
 	// Check for a file extension
 	filetype := strings.Split(path, ".")
 	if len(filetype) <= 1 {
@@ -32,13 +31,13 @@ func LoadTextureFromMemory(path string) rl.Texture2D {
 	}
 	// Load image from the bytes, using the length of the bytes array as it's size and
 	// the type of the file from filetype variable from earlier
-	image := rl.LoadImageFromMemory("."+filetype[len(filetype)-1], bytes, int32(len(bytes)))
-	defer rl.UnloadImage(image)
+	image := sysimp.LoadImageFromMemory("."+filetype[len(filetype)-1], bytes, int32(len(bytes)))
+	defer sysimp.UnloadImage(image)
 	// Return the texture
-	return rl.LoadTextureFromImage(image)
+	return sysimp.LoadTextureFromImage(image)
 }
 
-func LoadSoundFromMemory(path string) rl.Sound {
+func LoadSoundFromMemory(path string) sysimp.Sound {
 	// Check for a file extension
 	filetype := strings.Split(path, ".")
 	if len(filetype) <= 1 {
@@ -49,7 +48,7 @@ func LoadSoundFromMemory(path string) rl.Sound {
 	if err != nil {
 		panic(err)
 	}
-	wave := rl.LoadWaveFromMemory("."+filetype[len(filetype)-1], bytes, int32(len(bytes)))
-	defer rl.UnloadWave(wave)
-	return rl.LoadSoundFromWave(wave)
+	wave := sysimp.LoadWaveFromMemory("."+filetype[len(filetype)-1], bytes, int32(len(bytes)))
+	defer sysimp.UnloadWave(wave)
+	return sysimp.LoadSoundFromWave(wave)
 }

@@ -1,6 +1,6 @@
 package main
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import "go-averi2d/sysimp"
 
 type Scene interface {
 	Update()
@@ -44,24 +44,24 @@ func (s *BaseScene) Draw() {
 			childScene := child.Get()
 			if childScene.Visible {
 				if childScene.Render {
-					rl.DrawTexturePro(
+					sysimp.DrawTexturePro(
 						TextureAtlas,
-						rl.NewRectangle(
+						sysimp.NewRectangle(
 							childScene.SourceX*float32(1+childScene.FrameX),
 							childScene.SourceY*float32(1+childScene.FrameY),
 							childScene.SourceWidth*Flip(childScene.FlipHorizontal),
 							childScene.SourceHeight,
 						),
 
-						rl.NewRectangle(
+						sysimp.NewRectangle(
 							childScene.DestX*ScaleFactor+float32(DisplayX),
 							childScene.DestY*ScaleFactor+float32(DisplayY),
 							childScene.SourceWidth*ScaleFactor*(childScene.Scale*s.Scale),
 							childScene.SourceHeight*ScaleFactor*(childScene.Scale*s.Scale),
 						),
-						rl.Vector2Zero(),
+						sysimp.Vector2Zero(),
 						0.0,
-						rl.White,
+						sysimp.White,
 					)
 				}
 				child.Draw()

@@ -2,7 +2,7 @@
 
 package main
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import "go-averi2d/sysimp"
 
 // Screen resolution and aspect ratio
 const IdealScreenWidth float32 = 1800 // The sides will be cut off on less wide screens (basically all screens)
@@ -11,7 +11,7 @@ const IdealScreenHeight float32 = 720 // But all 720 height units will always be
 const MaxAspectRatio float32 = 2.5 // This is also the "ideal" aspect ratio
 const MinAspectRatio float32 = 1.0
 
-var BackgroundColour = rl.GetColor(0x052c46ff)
+var BackgroundColour = sysimp.GetColor(0x052c46ff)
 var ScaleFactor float32 = 1.0
 
 var DisplayX, DisplayY int32

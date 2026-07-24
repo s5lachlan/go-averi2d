@@ -1,6 +1,6 @@
 package main
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import "go-averi2d/sysimp"
 
 var MenuHighlightTime int
 var MenuSelection MenuSelectionEnum
@@ -54,8 +54,8 @@ func NewMenu() *Menu {
 
 func (m *Menu) Draw() {
 	m.BaseScene.Draw()
-	rl.DrawText("Averi 2D Platformer", int32(530*ScaleFactor+float32(DisplayX)), int32(50*ScaleFactor+float32(DisplayY)), int32(74*ScaleFactor), rl.DarkGreen)
-	rl.DrawText("Recreational Go Port", int32(530*ScaleFactor+float32(DisplayX)), int32(120*ScaleFactor+float32(DisplayY)), int32(34*ScaleFactor), rl.DarkGreen)
+	sysimp.DrawText("Averi 2D Platformer", int32(530*ScaleFactor+float32(DisplayX)), int32(50*ScaleFactor+float32(DisplayY)), int32(74*ScaleFactor), sysimp.DarkGreen)
+	sysimp.DrawText("Recreational Go Port", int32(530*ScaleFactor+float32(DisplayX)), int32(120*ScaleFactor+float32(DisplayY)), int32(34*ScaleFactor), sysimp.DarkGreen)
 }
 
 func (m *Menu) Update() {
@@ -67,13 +67,13 @@ func (m *Menu) Update() {
 	}
 
 	// This controls the menu, W to move up, S to go down, and limit between 0 and 2.
-	if rl.IsKeyPressed(rl.KeyW) || rl.IsKeyPressed(rl.KeyS) {
-		rl.SetSoundVolume(ChooseSound, 0.5)
-		rl.PlaySound(ChooseSound)
+	if sysimp.IsKeyPressed(sysimp.KeyW) || sysimp.IsKeyPressed(sysimp.KeyS) {
+		sysimp.SetSoundVolume(ChooseSound, 0.5)
+		sysimp.PlaySound(ChooseSound)
 	}
-	if rl.IsKeyPressed(rl.KeyW) && MenuSelection > 0 {
+	if sysimp.IsKeyPressed(sysimp.KeyW) && MenuSelection > 0 {
 		MenuSelection -= 1
-	} else if rl.IsKeyPressed(rl.KeyS) && MenuSelection < 2 {
+	} else if sysimp.IsKeyPressed(sysimp.KeyS) && MenuSelection < 2 {
 		MenuSelection += 1
 	}
 
@@ -85,12 +85,12 @@ func (m *Menu) Update() {
 		MenuHighlightButton.SourceX = 82
 	}
 
-	if rl.IsKeyPressed(rl.KeySpace) {
-		rl.SetSoundVolume(SelectSound, 0.5)
-		rl.PlaySound(SelectSound)
+	if sysimp.IsKeyPressed(sysimp.KeySpace) {
+		sysimp.SetSoundVolume(SelectSound, 0.5)
+		sysimp.PlaySound(SelectSound)
 		switch MenuSelection {
 		case MenuStartGame:
-			rl.SetExitKey(rl.KeyNull)
+			sysimp.SetExitKey(sysimp.KeyNull)
 			CurrentScene = GameScene
 		case MenuQuit:
 			ExitGame = true

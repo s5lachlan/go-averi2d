@@ -1,6 +1,6 @@
 package main
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import "go-averi2d/sysimp"
 
 func Flip(boolean bool) float32 {
 	if boolean {
@@ -10,9 +10,9 @@ func Flip(boolean bool) float32 {
 	}
 }
 
-func UnloadSounds(sounds ...rl.Sound) {
+func UnloadSounds(sounds ...sysimp.Sound) {
 	for _, sound := range sounds {
-		rl.UnloadSound(sound)
+		sysimp.UnloadSound(sound)
 	}
 }
 
@@ -36,8 +36,8 @@ func Ternary(condition bool, value1 any, value2 any) any {
 }
 
 func ScaleDisplay() {
-	var screenWidthFloat float32 = float32(rl.GetScreenWidth())
-	var screenHeightFloat float32 = float32(rl.GetScreenHeight())
+	var screenWidthFloat float32 = float32(sysimp.GetScreenWidth())
+	var screenHeightFloat float32 = float32(sysimp.GetScreenHeight())
 
 	// ADJUST DISPLAY AREA in case window is resized
 	if screenWidthFloat/screenHeightFloat > MaxAspectRatio {
