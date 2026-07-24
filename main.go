@@ -33,11 +33,11 @@ func main() {
 
 		ScaleDisplay()
 		// Hardcoded background and floor for now
-		sysimp.DrawRectangle(DisplayX, DisplayY, int32(ScaleFactor*IdealScreenWidth), int32(ScaleFactor*IdealScreenHeight), sysimp.GetColor(0x90EE90ff))
+		sysimp.DrawRectangle(DisplayX, DisplayY, int32(ScaleFactor*IdealScreenWidth), int32(ScaleFactor*IdealScreenHeight), sysimp.GetColour(0x90EE90ff))
 		sysimp.DrawRectangleV(
 			sysimp.NewVector2(0+float32(DisplayX), 350*ScaleFactor+float32(DisplayY)),
 			sysimp.NewVector2(IdealScreenWidth*ScaleFactor, (IdealScreenHeight-350)*ScaleFactor),
-			sysimp.Gray,
+			sysimp.Grey,
 		)
 
 		CurrentScene.Update()

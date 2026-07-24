@@ -11,7 +11,7 @@ const IdealScreenHeight float32 = 720 // But all 720 height units will always be
 const MaxAspectRatio float32 = 2.5 // This is also the "ideal" aspect ratio
 const MinAspectRatio float32 = 1.0
 
-var BackgroundColour = sysimp.GetColor(0x052c46ff)
+var BackgroundColour = sysimp.GetColour(0x052c46ff)
 var ScaleFactor float32 = 1.0
 
 var DisplayX, DisplayY int32
